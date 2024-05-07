@@ -1,0 +1,19 @@
+
+    window(sf::VideoMode(800.0f, 600.0f), "teste sfml") // cria uma janela em SFML
+
+    sf::RectangleShape jogador(sf::Vector2f(50.0f, 50.0f)); /* cria um obj retangular com as proporçoes indicadas*/
+    
+    jogador.setFillColor(sf::Color::Blue); /* define a cor do jogador*/
+
+    jogador.setPosition(50.0f,50.0f); // altera posiçao do jogador
+
+    sf::Event evento; // cria obj classe evento
+    window.pollEvent(evento)  //propriedade classe window que verifica eventos
+    evento.type == sf::Event::Closed //evento tem uma propriedade typo, que pode ser verificada com outros metodos da classe
+    window.close(); // metodo classe window
+    evento.type == sf::Event::KeyPressed // a classe evento possui uma outra classe, que é um tipo de evento, que ppode ser uma chave press
+    evento.key.code == sf::Keyboard::Escape / sendo uma chave, o obj evento/keypressed possui um mtodo code, que le a tecla desejada
+
+        window.clear(); // limpa a tela anterior
+        window.draw(jogador); //desenha um obj
+        window.display(); /*atualiza a tela, mostrando todos os obj desenhados*/
