@@ -1,12 +1,12 @@
 #pragma once
-#include <SFML/Graphics.hpp> as sf
-#include <iostream>
-
+#include <SFML/Graphics.hpp>
+#include "Jogador/Jogador.h"
 
 class Principal
 {
 private:
     sf::RenderWindow window;
+    Jogador::Jogador jogador;
 public:
     Principal();
     ~Principal();

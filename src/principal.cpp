@@ -1,7 +1,8 @@
 #include "../include/principal.h"
 
 Principal::Principal(/* args */):
-    window(sf::VideoMode(800.0f, 600.0f), "teste sfml") // cria uma janela em SFML
+    window(sf::VideoMode(800.0f, 600.0f), "teste sfml"), // cria uma janela em SFML
+    jogador(sf::Vector2f(50.0f,150.0f), sf::Vector2f(400.0f, 300.0f))
 {
     executar();
 }
@@ -11,10 +12,7 @@ Principal::~Principal()
 }
 void Principal::executar(){
     //criando um obj na (retangulo)
-    sf::RectangleShape jogador(sf::Vector2f(50.0f, 50.0f)); /* cria um obj retangular com as proporçoes indicadas*/
-    jogador.setFillColor(sf::Color::Blue); /* define a cor do jogador*/
-    jogador.setPosition(50.0f,50.0f); // altera posiçao do jogador
-    while (window.isOpen()) // propriedade da classe window, que verifica se a mesma esta aberta
+        while (window.isOpen()) // propriedade da classe window, que verifica se a mesma esta aberta
     {
         sf::Event evento; // cria obj classe evento
         if(window.pollEvent(evento)){ //propriedade classe window que verifica eventos
@@ -26,8 +24,12 @@ void Principal::executar(){
                 }
             }
         } 
+
+        /*quando criamos um evento, todas as classes que possuem evento sao chamadas, por exemplo, a funçao jogador.move() possui 
+        uma condiçao que depende de um evento (mover caso tecla esteja pressionada), e nao necessita nenhum evento passado em sua chamada*/
         window.clear(); // limpa a tela anterior
-        window.draw(jogador); //desenha um obj
+        jogador.move();
+        window.draw(jogador.get_body()); //desenha um obj
         window.display(); /*atualiza a tela, mostrando todos os obj desenhados*/
     }   
     
