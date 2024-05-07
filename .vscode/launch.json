@@ -29,8 +29,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/argenton/Documentos/teste_7_sfml/include/math",
-      "program": "/home/argenton/Documentos/teste_7_sfml/include/math/build/Debug/outDebug",
+      "cwd": "/home/argenton/Documentos/teste_7_sfml/src",
+      "program": "/home/argenton/Documentos/teste_7_sfml/src/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

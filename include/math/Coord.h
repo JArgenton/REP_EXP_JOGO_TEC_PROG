@@ -102,7 +102,7 @@ Coord<TIPO>::~Coord(){
     Coord<TIPO> Coord<TIPO>::operator*(Coord<TIPO> coordenada){
         return coord<TIPO>(this->x * coordenada.x, this->y * coordenada.y);
     }
-
+ 
     template <typename TIPO>
     Coord<TIPO> Coord<TIPO>::operator*(double escalar){
         return coord<TIPO>(this->x * escalar, this->y * escalar);
