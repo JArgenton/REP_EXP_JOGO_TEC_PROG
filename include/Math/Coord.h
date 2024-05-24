@@ -33,6 +33,11 @@ public:
 
 };
 
+typedef Coord<double> CoordD;
+typedef Coord<float> CoordF;
+typedef Coord<int> CoordI;
+typedef Coord<unsigned int> CoordU;
+
 template <typename TIPO>
     Coord<TIPO>::Coord(TIPO x, TIPO y):
         x(x),
@@ -74,7 +79,7 @@ Coord<TIPO>::~Coord(){
 
     template <typename TIPO>
     void Coord<TIPO>::operator/=(double escalar){
-        if (scalar == 0.0f) {
+        if (escalar == 0.0f) {
             std::cout << "ERROR: Cannot divide by zero." << std::endl;
             exit(1);
         }
@@ -82,40 +87,40 @@ Coord<TIPO>::~Coord(){
         this->y = this->y / escalar;
     }
 
-    // *** DUVIDA *** estou retornando um objeto da classe coord, e chamando  sua construtora. na funçao, é rotornado o obj inicial ou um novo que é criado 
+    // *** DUVIDA *** estou retornando um objeto da classe Coord, e chamando  sua construtora. na funçao, é rotornado o obj inicial ou um novo que é criado 
     // com a construtora. Se for o msm obj inicial, eu posso utilizar a construtora dele para modificar os parametros da mesma em qualquer momento:::
 
-    //resposta: sim, ele cria um novo obj, IMPORTANTE, caso a classe coord tivesse ponteiros, seria necessario criar um new coord, pois a destrutora seria
+    //resposta: sim, ele cria um novo obj, IMPORTANTE, caso a classe Coord tivesse ponteiros, seria necessario criar um new Coord, pois a destrutora seria
     // chamada e apagaria os ponteiros
     //uso desse operador seria em casos como c = a+b
     template <typename TIPO>
     Coord<TIPO> Coord<TIPO>::operator+(Coord<TIPO> coordenada){
-        return coord<TIPO>(this->x + coordenada.x, this->y + coordenada.y);
+        return Coord<TIPO>(this->x + coordenada.x, this->y + coordenada.y);
     }
 
     template <typename TIPO>
     Coord<TIPO> Coord<TIPO>::operator-(Coord<TIPO> coordenada){
-        return coord<TIPO>(this->x - coordenada.x, this->y - coordenada.y);
+        return Coord<TIPO>(this->x - coordenada.x, this->y - coordenada.y);
     }
 
     template <typename TIPO>
     Coord<TIPO> Coord<TIPO>::operator*(Coord<TIPO> coordenada){
-        return coord<TIPO>(this->x * coordenada.x, this->y * coordenada.y);
+        return Coord<TIPO>(this->x * coordenada.x, this->y * coordenada.y);
     }
  
     template <typename TIPO>
     Coord<TIPO> Coord<TIPO>::operator*(double escalar){
-        return coord<TIPO>(this->x * escalar, this->y * escalar);
+        return Coord<TIPO>(this->x * escalar, this->y * escalar);
     }
 
     template <typename TIPO>
     Coord<TIPO> Coord<TIPO>::operator/(Coord<TIPO> coordenada){
-        return coord<TIPO>(this->x / coordenada.x, this->y / coordenada.y);
+        return Coord<TIPO>(this->x / coordenada.x, this->y / coordenada.y);
     }
 
     template <typename TIPO>
     Coord<TIPO> Coord<TIPO>::operator/(double escalar){
-        return coord<TIPO>(this->x / escalar, this->y / escalar);
+        return Coord<TIPO>(this->x / escalar, this->y / escalar);
     }
 
 
