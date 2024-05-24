@@ -1,6 +1,6 @@
-#pragma onde
+#pragma once
 
-#include "Coord.h"
+#include "Math/Coord.h"
 namespace Entities{
 
     class Entity
@@ -12,12 +12,5 @@ namespace Entities{
         ~Entity();
     };
     
-    Entity::Entity(/* args */)
-    {
-    }
-    
-    Entity::~Entity()
-    {
-    }
     
 }
