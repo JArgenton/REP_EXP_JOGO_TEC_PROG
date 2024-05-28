@@ -2,6 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <mutex>
+#include <vector>
+#include <string>
+#include <unordered_map> // gerenciar texturas
 
 namespace Managers{
 
@@ -11,7 +14,23 @@ namespace Managers{
     class Graphics
     {
     private:
-    // linha de codigo baseado sob o Singletown design pattern, também foram usadas referencias de codigo gerado por IAs e pelo Monitor Burda
+        sf::RenderWindow *window; // janela que o jogo passara
+
+        std::unordered_map<std::string, sf::Font*> fontsMap; // Mapa de fontes (ED2), carregar e organizar fontes de maneira eficiente
+        std::unordered_map<std::string, sf::Texture*> texturesMap; // Mapa de texturas (ED2), carregar, organizar as texturas utilizadas
+
+        // clock para processamento
+        sf::Clock clock; 
+
+        //camera do jogo (sera centralizada no jogador)
+        sf::View view;
+
+        //serie de variaveis para controle de fps
+        unsigned int frameRateLimit;
+        bool displayFPS;
+        sf::Text fpsText;
+
+    // linhas de codigo baseado sob o Singletown design pattern
 
     /* O padrao singletown assegura que apenas uma instancia de uma classe seja criada durante a execuçao do codigo, e que essa instancia póssa ser
     fornecida de maneira global a todo o codigo, sendo util quando é necessario que apenas um unico obj coordene açoes em todo o sistema, exatamente 
@@ -27,6 +46,55 @@ namespace Managers{
     Graphics();
 
     public:
+        /* a nomenclatura tipo& indica que o parametro esta sendo passado por referencia, ou seja, seu acesso sera feito com tipo.caracteristica,
+        e nao é possivel modificar o obj original dentro da funçao. */
+
+        //funçoes distinadas a carregar e manipular fontes
+        sf::Font*  loadFont(const std::string& filepath);
+
+
+        //funçoes destinadas a carregar e manipular texturas
+        sf::Texture* loadTexture(const std::string& filepath);
+
+
+        //funçoes destinadas a carregar e centralizar a tela.
+        void setView(const sf::View& View);
+        const sf::View& getView();
+        void centerViewOn(const sf::Vector2f& position);
+
+        //funçoes para obter proporçoes da janela
+        sf::Vector2u getWindowSize() const;
+
+        /*a funçao retorna um timpo "FloatRect", tal estrutura é um retangulo com coordenadas com ponto flutuante que representam os limites 
+        da view atual com relaçao a janela. Essa funçao tera uso para o gerenciador de colisoes. */
+        sf::FloatRect getViewBounds();
+
+        //funçoes para manipulaçao da janela
+
+        //limpa a janela com a cor padrao (preto)
+        void clear(const sf::Color& color = sf::Color::Black);
+
+        //a funçao render adiciona os obj a serem desenhados em uma fila, que seja executada quando a tela atualizar
+        void render(sf::RectangleShape *body);
+
+        //a funçao display é chamada apos desenhar os obj(render), e serve para exibir tais obj (exibe alteraçoes)
+        void display();
+        void closeWindow();
+
+        //atribui um valor maximo para framerate
+        void setFrameRate(unsigned int rateLimit);
+        // funçao para mostrar FPS
+        void showFPS(bool show);
+        //sao duas funçoes que serao chamadas regularmente, sendo a primeira a que atualiza a logiga e as coisas processadas no jogo
+        void update();
+        //a segunda funçao coleta os inputs do player
+        void processEvents();
+
+
+
+
+
+
 
     // as proximas duas passagem talvez sejam desnecessarias para o projeto, mas também foi implementada para fins de aprendizado
     /* Essa passagem DELETA O CONSTRUTOR DE COPIAS DA CLASSE, fazendo com que nao seja possivel copiala para outras instancias e garante o Singletown*/
@@ -43,15 +111,7 @@ namespace Managers{
     apenas retorna um ponteiro para tal obj, e em caso contrario a construtora privada da classe é chama, criando um novo obj e passando-o como ponteiro
     Além disso, o metodo também possui uma passagem std::lock_guard<std::mutx> lock(ntx), que garante a seguraça da criaçao unica mesmo em multithread*/
     static Graphics* get_instance();
-
-
     /*No arquivo cpp também estao inicializados os metodos estaticos da classe, sendo instance delcarada como null e mutex  como mtx*/
-
-
-
-
-
-
 
     // a destrutora continua publica
     ~Graphics();
