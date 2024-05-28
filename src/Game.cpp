@@ -1,15 +1,23 @@
 #include "Game.h"
 
+using namespace Managers;
 Game::Game():
-//todo grapic manager
-
+GraphicManager(Graphics::get_instance())
 {
-    executar();
+    exec();
 }
 
 Game::~Game(){
 }
 
-void Game::executar(){
-    //todo grapic manager
+void Game::exec(){
+    while(GraphicManager->isWindowOpen()){
+        GraphicManager->updateDeltaTime();
+        GraphicManager->clear();
+
+        /*TODO*/
+        /*update all and render all*/
+
+        GraphicManager->display();
+    }
 }

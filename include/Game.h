@@ -1,13 +1,15 @@
 #pragma once
 #include "Entities/Characters/Player.h"
+#include "Managers/Graphics.h"
+
 
 class Game {
 private:
-    //todo grapic manager
+    Managers::Graphics* GraphicManager;
     Entities::Characters::Player Player1;
  
 public:
-    Game(/* args */);
+    Game();
     ~Game();
-    void executar();
+    void exec();
 };

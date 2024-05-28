@@ -27,8 +27,8 @@ namespace Managers{
 
         //serie de variaveis para controle de fps
         unsigned int frameRateLimit;
-        bool displayFPS;
-        sf::Text fpsText;
+
+        static float dt;
 
     // linhas de codigo baseado sob o Singletown design pattern
 
@@ -46,6 +46,9 @@ namespace Managers{
     Graphics();
 
     public:
+        // a destrutora continua publica
+        ~Graphics();
+
         /* a nomenclatura tipo& indica que o parametro esta sendo passado por referencia, ou seja, seu acesso sera feito com tipo.caracteristica,
         e nao é possivel modificar o obj original dentro da funçao. */
 
@@ -58,9 +61,7 @@ namespace Managers{
 
 
         //funçoes destinadas a carregar e centralizar a tela.
-        void setView(const sf::View& View);
-        const sf::View& getView();
-        void centerViewOn(const sf::Vector2f& position);
+        void centerViewOn(Math::CoordF position);
 
         //funçoes para obter proporçoes da janela
         sf::Vector2u getWindowSize() const;
@@ -70,30 +71,20 @@ namespace Managers{
         sf::FloatRect getViewBounds();
 
         //funçoes para manipulaçao da janela
-
+        bool isWindowOpen() const;
         //limpa a janela com a cor padrao (preto)
         void clear(const sf::Color& color = sf::Color::Black);
 
         //a funçao render adiciona os obj a serem desenhados em uma fila, que seja executada quando a tela atualizar
         void render(sf::RectangleShape *body);
+        void render(sf::Text* text);
 
         //a funçao display é chamada apos desenhar os obj(render), e serve para exibir tais obj (exibe alteraçoes)
         void display();
         void closeWindow();
 
-        //atribui um valor maximo para framerate
-        void setFrameRate(unsigned int rateLimit);
-        // funçao para mostrar FPS
-        void showFPS(bool show);
-        //sao duas funçoes que serao chamadas regularmente, sendo a primeira a que atualiza a logiga e as coisas processadas no jogo
-        void update();
-        //a segunda funçao coleta os inputs do player
-        void processEvents();
-
-
-
-
-
+        //funçao para atualizar o tempo, inspirada do tutorial jogo SFML do Monitor Burda
+        void updateDeltaTime();
 
 
     // as proximas duas passagem talvez sejam desnecessarias para o projeto, mas também foi implementada para fins de aprendizado
@@ -112,11 +103,5 @@ namespace Managers{
     Além disso, o metodo também possui uma passagem std::lock_guard<std::mutx> lock(ntx), que garante a seguraça da criaçao unica mesmo em multithread*/
     static Graphics* get_instance();
     /*No arquivo cpp também estao inicializados os metodos estaticos da classe, sendo instance delcarada como null e mutex  como mtx*/
-
-    // a destrutora continua publica
-    ~Graphics();
-
-
     };
-
 }
