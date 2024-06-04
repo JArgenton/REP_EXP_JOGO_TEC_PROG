@@ -1,19 +1,18 @@
 #include "Math/Coord.h"
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <mutex>
-
+#include "List/EntityList.h"
 namespace managers{
-
-
     class Collision{
         private:
+            List::EntityList* StaticEntities;
+            List::EntityList* MovingEntities;
             static Collision* instance;
             static std::mutex mtx;
-            Collision();
         public:
+            Collision(List::EntityList* StaticEntities, List::EntityList* MovingEntities);
             ~Collision();
-            static Collision* get_instance();
-            void check_collision(sf::RectangleShape* body1, sf::RectangleShape* body2);
+            Math::CoordF check_collision(sf::RectangleShape* body1, sf::RectangleShape* body2);
+            void exec();
     };
 }
