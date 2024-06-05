@@ -21,7 +21,6 @@ namespace Entities{
                 void initialize();
 
                 void collide(Entity* other, Math::CoordF intersection);
-
             };  
 
     }

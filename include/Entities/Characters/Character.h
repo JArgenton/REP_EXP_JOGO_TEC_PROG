@@ -15,7 +15,9 @@ namespace Entities{
 
                 const int getHealth() const;
                 void reciveDemage(const int damage);
-                void moveOnCOlision(const Math::CoordF intersection, Entity* other);
+                virtual void collide(const Entity* other, Math::CoordF intersection);
+                virtual void updateSprite() = 0;
+                virtual void reciveDamage(const int damage);
 
 
         };  // class Character

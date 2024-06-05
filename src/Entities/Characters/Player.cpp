@@ -22,3 +22,6 @@ void Player::update(float dt){
 void Player::initialize(){
 
 }
+void collide(Entity* other, Math::CoordF intersection){
+    //TODO
+}
