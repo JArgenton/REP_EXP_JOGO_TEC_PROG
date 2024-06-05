@@ -29,7 +29,7 @@ namespace Entities{
             virtual void update(float dt) = 0;
             virtual void initialize() = 0;
 
-            virtual void colide(Entity* other, Math::CoordF intersection) = 0;
+            virtual void collide(Entity* other, Math::CoordF intersection) = 0;
 
         };
 }

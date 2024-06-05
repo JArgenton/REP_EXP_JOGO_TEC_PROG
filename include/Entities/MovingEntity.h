@@ -1,5 +1,6 @@
 #ifndef _MOVINGENTITY_H_
 #define _MOVINGENTITY_H_
+#pragma once 
 #include "Entity.h"
 
 
@@ -20,7 +21,9 @@ namespace Entities{
             virtual void render();
             virtual void update(const float dt) = 0;
             virtual void collide(Entity* other, Math::CoordF intersection) = 0;
-            virtual void updateSprite(const float dt) = 0;
+           
+           /*TODO*/ 
+            //virtual void updateSprite(const float dt) = 0;
             const bool isActive() const;
             const bool isFacingRight() const;
             void setFacingRight(const bool right);

@@ -9,15 +9,23 @@ LIB		:= lib
 LIBRARIES	:= -lsfml-graphics -lsfml-window -lsfml-system
 EXECUTABLE	:= main
 
+# Find all .cpp files in the src directory
+SOURCES := $(wildcard $(SRC)/*.cpp)
+# Replace .cpp with .o for each source file
+OBJECTS := $(SOURCES:.cpp=.o)
 
 all: $(BIN)/$(EXECUTABLE)
 
 run: clean all
-	clear
-	./$(BIN)/$(EXECUTABLE)
+	@clear
+	@./$(BIN)/$(EXECUTABLE)
 
-$(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
+$(BIN)/$(EXECUTABLE): $(OBJECTS)
+    
+	@$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
+
+$(SRC)/%.o: $(SRC)/%.cpp
+	@$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) -c $< -o $@
 
 clean:
-	-rm $(BIN)/*
+	@-rm $(SRC)/* $(SRC)/*.o

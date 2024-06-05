@@ -1,3 +1,4 @@
+#pragma once 
 #include "Math/Coord.h"
 #include <SFML/Graphics.hpp>
 #include <mutex>

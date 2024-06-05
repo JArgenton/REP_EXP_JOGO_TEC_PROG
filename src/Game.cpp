@@ -1,8 +1,11 @@
 #include "Game.h"
+#include "Managers/Graphics.h"
 
 using namespace Managers;
+using namespace Entities::Characters;
 Game::Game():
-GraphicManager(Graphics::get_instance())
+GraphicManager(Graphics::get_instance()),
+Player1()
 {
     exec();
 }

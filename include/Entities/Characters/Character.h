@@ -1,4 +1,5 @@
-#include "MovingEntity.h"
+#pragma once 
+#include "Entities/MovingEntity.h"
 
 namespace Entities{
 
