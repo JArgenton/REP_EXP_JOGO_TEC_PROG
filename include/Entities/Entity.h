@@ -20,7 +20,7 @@ namespace Entities{
             Entity(Math::CoordF position = Math::CoordF(0.f, 0.f), Math::CoordF size = Math::CoordF(0.f, 0.f), ID id = empty);
             virtual ~Entity();
             void set_position(Math::CoordF pos);
-            Math::CoordF get_positon();
+            Math::CoordF get_position();
             Math::CoordF get_size();
             ID get_Id() const;
             virtual void render();

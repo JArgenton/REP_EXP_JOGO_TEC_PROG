@@ -27,11 +27,36 @@ MovingEntity::MovingEntity(Math::CoordF position = Math::CoordF(0.f, 0.f), Math:
                 facing_right = right;
             }
             void MovingEntity::setFacingRight(){
-                facing_right = velocity.x <= 0 ? false : true;
+                facing_right = velocity.x <= 0.0f ? false : true;
             }
-            void setActive(const bool active);
-            void setVelocity(const Math::CoordF velocity);
+            void MovingEntity::setActive(const bool active){
+                this->active = active;
+            }
+            void MovingEntity::setVelocity(const Math::CoordF velocity){
+                this->velocity = velocity;
+            }
             Math::CoordF getVelocity();
-            void moveOnColision(const Math::CoordF intersection, Entity* other);
+            void MovingEntity::moveOnColision(const Math::CoordF intersection, Entity* other){
+                Math::CoordF otherPos = other->get_position();
+
+                if(intersection.x > intersection.y){ // colision on x
+                    if(position.x > intersection.y){
+                        position.x += intersection.x;
+                    }
+                    else{
+                        position.x -= intersection.x;
+                    }
+                    velocity.x *= 0.0f;
+             }
+                else{ //colision on y
+                    if(position.y > otherPos.y){
+                        position.y += intersection.y;
+                    }
+                    else{
+                        position.y -= intersection.y;
+                    }
+                    velocity.y *= 0.0f;
+                }
+            }
 
 }

@@ -12,7 +12,7 @@ using namespace Entities;
     void Entity::set_position(Math::CoordF pos){
         this->position = pos;
     }
-    Math::CoordF Entity::get_positon(){
+    Math::CoordF Entity::get_position(){
         return position;
     }
     Math::CoordF Entity::get_size(){

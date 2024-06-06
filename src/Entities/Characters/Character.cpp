@@ -17,9 +17,5 @@ namespace Entities{
         void Character::reciveDemage(const int damage){
             health -= damage;
         }
-
-        void Character::moveOnCOlision(const Math::CoordF intersection, Entity* other){
-            //TODO
-        }   
     }   // namespace Characters
 }   // namespace Entities
